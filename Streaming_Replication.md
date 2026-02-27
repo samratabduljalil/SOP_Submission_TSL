@@ -26,7 +26,7 @@ This guide covers setting up **Physical Streaming Replication** between two Rock
 Open the PostgreSQL configuration file:
 
 ```bash
-sudo vi /var/lib/pgsql/15/data/postgresql.conf
+sudo nano /var/lib/pgsql/16/data/postgresql.conf
 ```
 
 Set the following parameters:
@@ -59,7 +59,7 @@ sudo chmod 700 /log/archive/
 Open the host-based authentication file:
 
 ```bash
-sudo vi /var/lib/pgsql/15/data/pg_hba.conf
+sudo nano /var/lib/pgsql/16/data/pg_hba.conf
 ```
 
 Add the following line to allow the slave to connect for replication:
