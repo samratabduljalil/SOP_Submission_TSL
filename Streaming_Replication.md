@@ -200,7 +200,6 @@ tail -n 50 /data/pgsql/16/data/log/postgresql-*.log
 ```
 
 ### Common Issues
-
 | Issue | Possible Cause |
 |-------|---------------|
 | Slave cannot connect to master | Firewall blocking port 5432, or wrong IP in `pg_hba.conf` |
