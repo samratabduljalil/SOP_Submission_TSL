@@ -137,11 +137,7 @@ chmod 700 /data/pgsql/16/data
 ### 2.4 Take a Base Backup from the Master
 
 ```bash
-sudo -u postgres pg_basebackup \
-  -h 192.168.109.128 \
-  -D /data/pgsql/16/data \
-  -U replicator \
-  -Fp -Xs -P -R
+sudo -u postgres pg_basebackup -h 192.168.109.128 -D /data/pgsql/16/data -U replicator -Fp -Xs -P -R
 ```
 
 | Flag  | Description                                          |
