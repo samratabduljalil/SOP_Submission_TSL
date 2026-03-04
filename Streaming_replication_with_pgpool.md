@@ -52,7 +52,7 @@ This SOP documents the process of installing and configuring **pgpool-II** as a 
 ## Prerequisites
 
 - RHEL 9 (or compatible) OS on all nodes
-- PostgreSQL 16 already installed and streaming replication configured
+- PostgreSQL 16 already installed and streaming replication configured [(PostgreSQL Streaming Replication Setup)](https://github.com/samratabduljalil/SOP_Submission_TSL/blob/main/Streaming_Replication.md)
 - Root or sudo access on the pgpool server
 - Network connectivity between all nodes
 
