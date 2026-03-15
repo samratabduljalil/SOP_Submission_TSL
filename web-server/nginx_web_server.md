@@ -12,6 +12,8 @@
 
 > ⚠️ Replace IPs with your actual VM IPs. Run `ip addr` on each VM to find them.
 
+
+
 ---
 
 ## STEP 1 — Find Your VM IPs (on each VM)
