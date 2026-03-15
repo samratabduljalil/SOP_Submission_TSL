@@ -2,7 +2,7 @@
 
 ---
 
-## 📋 VM Layout
+## VM Layout
 
 | Role | Hostname | IP |
 |------|----------|----|
@@ -10,9 +10,7 @@
 | Web Server 1 | `web1` | `192.168.1.11` |
 | Web Server 2 | `web2` | `192.168.1.12` |
 
-> ⚠️ Replace IPs with your actual VM IPs. Run `ip addr` on each VM to find them.
-
-
+> Replace IPs with your actual VM IPs. Run `ip addr` on each VM to find them.
 
 ---
 
