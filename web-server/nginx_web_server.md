@@ -1,4 +1,4 @@
-###  NGNIX Full Setup on Local Rocky Linux VMs (No External DNS)
+###  NGNIX Full Setup on Local Rocky Linux VMs 
 
 ---
 
