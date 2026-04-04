@@ -37,7 +37,7 @@
 
 ## ══════════════════════════════════════════════
 ## PART 1 — PMM SERVER SETUP
-## ▶ Run ONLY on: 192.168.109.128
+## Run ONLY on: 192.168.109.128
 ## ══════════════════════════════════════════════
 
 ---
@@ -45,7 +45,7 @@
 ### Step 1.1 — Update System
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 sudo dnf update -y
 sudo dnf install -y curl wget vim net-tools
@@ -56,7 +56,7 @@ sudo dnf install -y curl wget vim net-tools
 ### Step 1.2 — Install Docker Engine
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 # Remove any old Docker packages
 sudo dnf remove -y docker docker-common docker-selinux docker-engine
@@ -84,7 +84,7 @@ sudo systemctl status docker
 ### Step 1.3 — Open Firewall Ports on PMM Server
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 sudo firewall-cmd --permanent --add-port=80/tcp
 sudo firewall-cmd --permanent --add-port=443/tcp
@@ -99,7 +99,7 @@ sudo firewall-cmd --list-ports
 ### Step 1.4 — Set SELinux to Permissive
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
@@ -114,7 +114,7 @@ getenforce
 ### Step 1.5 — Deploy PMM Server as Docker Container
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 # Create a persistent volume for PMM data (metrics, dashboards, config)
 docker volume create pmm-data
@@ -160,7 +160,7 @@ https://192.168.109.128
 ### Step 1.7 — Confirm PMM Server is Reachable
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 curl -sk https://192.168.109.128/ping
 # Expected response: {"data":{}}
@@ -170,7 +170,7 @@ curl -sk https://192.168.109.128/ping
 
 ## ══════════════════════════════════════════════
 ## PART 2 — PMM CLIENT SETUP
-## ▶ Run on ALL THREE: 192.168.109.133 | .134 | .135
+## Run on ALL THREE: 192.168.109.133 | .134 | .135
 ## ══════════════════════════════════════════════
 
 > Steps 2.1, 2.2, 2.3, and 2.6 are **identical on all three nodes** — run the same command on each.
@@ -181,9 +181,9 @@ curl -sk https://192.168.109.128/ping
 ### Step 2.1 — Update System
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 sudo dnf update -y
 sudo dnf install -y curl wget vim net-tools
@@ -194,9 +194,9 @@ sudo dnf install -y curl wget vim net-tools
 ### Step 2.2 — Add Percona Repository
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 # Install Percona release manager
 sudo dnf install -y https://repo.percona.com/yum/percona-release-latest.noarch.rpm
@@ -213,9 +213,9 @@ sudo dnf repolist | grep pmm
 ### Step 2.3 — Install PMM Client
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 sudo dnf install -y pmm2-client
 
@@ -233,7 +233,7 @@ pmm-admin --version
 **On pg-node-1 (192.168.109.133):**
 
 ```bash
-# ▶ SERVER: 192.168.109.133 ONLY
+# SERVER: 192.168.109.133 ONLY
 
 sudo pmm-admin config \
   --server-url=https://admin:admin@192.168.109.128 \
@@ -244,7 +244,7 @@ sudo pmm-admin config \
 **On pg-node-2 (192.168.109.134):**
 
 ```bash
-# ▶ SERVER: 192.168.109.134 ONLY
+# SERVER: 192.168.109.134 ONLY
 
 sudo pmm-admin config \
   --server-url=https://admin:admin@192.168.109.128 \
@@ -255,7 +255,7 @@ sudo pmm-admin config \
 **On pg-node-3 (192.168.109.135):**
 
 ```bash
-# ▶ SERVER: 192.168.109.135 ONLY
+# SERVER: 192.168.109.135 ONLY
 
 sudo pmm-admin config \
   --server-url=https://admin:admin@192.168.109.128 \
@@ -268,9 +268,9 @@ sudo pmm-admin config \
 ### Step 2.5 — Enable and Start PMM Agent
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 sudo systemctl enable pmm-agent
 sudo systemctl start pmm-agent
@@ -295,7 +295,7 @@ Connected : true               ← must be true
 If `Connected: false`, check firewall and reachability first:
 
 ```bash
-# ▶ SERVER: 192.168.109.133  (or .134 / .135)
+# SERVER: 192.168.109.133  (or .134 / .135)
 
 curl -sk https://192.168.109.128/ping
 # Must return: {"data":{}}
@@ -306,9 +306,9 @@ curl -sk https://192.168.109.128/ping
 ### Step 2.6 — Open Required Firewall Ports on Client Nodes
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 # PMM Agent communication ports (agent → server)
 sudo firewall-cmd --permanent --add-port=42000-42005/tcp
@@ -325,9 +325,9 @@ sudo firewall-cmd --list-ports
 ### Step 2.7 — Set SELinux to Permissive on Client Nodes
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 sudo setenforce 0
 sudo sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
@@ -341,7 +341,7 @@ getenforce
 
 ## ══════════════════════════════════════════════
 ## PART 3 — POSTGRESQL CONFIGURATION FOR PMM
-## ▶ Run on ALL THREE: 192.168.109.133 | .134 | .135
+## Run on ALL THREE: 192.168.109.133 | .134 | .135
 ## ══════════════════════════════════════════════
 
 ---
@@ -353,7 +353,7 @@ Run this on the **Patroni primary node only**. The user will replicate to the ot
 First, identify which node is the primary:
 
 ```bash
-# ▶ SERVER: 192.168.109.133  (or any node)
+# SERVER: 192.168.109.133  (or any node)
 
 patronictl -c /etc/patroni/patroni.yml list
 # Look for the node showing "Leader" in the Role column
@@ -362,7 +362,7 @@ patronictl -c /etc/patroni/patroni.yml list
 Then on the **Leader node**, run:
 
 ```bash
-# ▶ SERVER: PRIMARY / LEADER NODE ONLY
+# SERVER: PRIMARY / LEADER NODE ONLY
 
 sudo -u postgres psql
 ```
@@ -390,9 +390,9 @@ GRANT pg_monitor TO pmm_user;
 This must be done on **all three nodes** because Patroni can promote any replica to primary:
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 # Find the exact path of pg_hba.conf on your system
 sudo -u postgres psql -c "SHOW hba_file;"
@@ -412,9 +412,9 @@ host    all         pmm_user    ::1/128         md5
 Reload PostgreSQL config on each node (no restart needed):
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 sudo -u postgres psql -c "SELECT pg_reload_conf();"
 # Expected: pg_reload_conf
@@ -429,7 +429,7 @@ sudo -u postgres psql -c "SELECT pg_reload_conf();"
 Use `patronictl edit-config` to safely apply parameters across all nodes. This avoids editing `postgresql.conf` manually on each node:
 
 ```bash
-# ▶ SERVER: 192.168.109.133  (any node with patronictl access)
+# SERVER: 192.168.109.133  (any node with patronictl access)
 
 patronictl -c /etc/patroni/patroni.yml edit-config
 ```
@@ -451,7 +451,7 @@ postgresql:
 Save and exit. Then apply with a rolling restart (Patroni promotes safely, no downtime):
 
 ```bash
-# ▶ SERVER: 192.168.109.133
+# SERVER: 192.168.109.133
 
 # Reload non-restart parameters immediately
 patronictl -c /etc/patroni/patroni.yml reload postgres
@@ -468,7 +468,7 @@ patronictl -c /etc/patroni/patroni.yml restart postgres
 Run on the **primary node only** — replication propagates it to replicas:
 
 ```bash
-# ▶ SERVER: PRIMARY / LEADER NODE ONLY
+# SERVER: PRIMARY / LEADER NODE ONLY
 
 sudo -u postgres psql -d postgres \
   -c "CREATE EXTENSION IF NOT EXISTS pg_stat_statements;"
@@ -486,13 +486,13 @@ sudo -u postgres psql -d postgres \
 ### Step 3.5 — Test PMM User Can Log in on All Nodes
 
 ```bash
-# ▶ SERVER: 192.168.109.133
+# SERVER: 192.168.109.133
 psql -h 127.0.0.1 -U pmm_user -d postgres -p 5432 -c "SELECT version();"
 
-# ▶ SERVER: 192.168.109.134
+# SERVER: 192.168.109.134
 psql -h 127.0.0.1 -U pmm_user -d postgres -p 5432 -c "SELECT version();"
 
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.135
 psql -h 127.0.0.1 -U pmm_user -d postgres -p 5432 -c "SELECT version();"
 ```
 
@@ -502,7 +502,7 @@ All three should return the PostgreSQL version string with no errors. If asked f
 
 ## ══════════════════════════════════════════════
 ## PART 4 — ADD POSTGRESQL SERVICE TO PMM
-## ▶ Each command runs on its own node ONLY
+## Each command runs on its own node ONLY
 ## ══════════════════════════════════════════════
 
 ---
@@ -510,7 +510,7 @@ All three should return the PostgreSQL version string with no errors. If asked f
 ### Step 4.0 — Add PostgreSQL on cluster level (Haproxy) 
 
 ```bash
-# ▶ SERVER: 192.168.109.133 ONLY
+# SERVER: 192.168.109.133 ONLY
 
 sudo pmm-admin add postgresql \
   --username=pmm_user \
@@ -527,7 +527,7 @@ sudo pmm-admin add postgresql \
 ### Step 4.1 — Add PostgreSQL on pg-node-1
 
 ```bash
-# ▶ SERVER: 192.168.109.133 ONLY
+# SERVER: 192.168.109.133 ONLY
 
 sudo pmm-admin add postgresql \
   --username=pmm_user \
@@ -542,7 +542,7 @@ sudo pmm-admin add postgresql \
 ### Step 4.2 — Add PostgreSQL on pg-node-2
 
 ```bash
-# ▶ SERVER: 192.168.109.134 ONLY
+# SERVER: 192.168.109.134 ONLY
 
 sudo pmm-admin add postgresql \
   --username=pmm_user \
@@ -557,7 +557,7 @@ sudo pmm-admin add postgresql \
 ### Step 4.3 — Add PostgreSQL on pg-node-3
 
 ```bash
-# ▶ SERVER: 192.168.109.135 ONLY
+# SERVER: 192.168.109.135 ONLY
 
 sudo pmm-admin add postgresql \
   --username=pmm_user \
@@ -572,7 +572,7 @@ sudo pmm-admin add postgresql \
 ### Step 4.4 — Verify All Services Are Running
 
 ```bash
-# ▶ SERVER: 192.168.109.133
+# SERVER: 192.168.109.133
 pmm-admin list
 ```
 
@@ -589,10 +589,10 @@ node_exporter        RUNNING    ← OS metrics collected automatically
 ```
 
 ```bash
-# ▶ SERVER: 192.168.109.134
+# SERVER: 192.168.109.134
 pmm-admin list
 
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.135
 pmm-admin list
 ```
 
@@ -602,7 +602,7 @@ pmm-admin list
 
 ## ══════════════════════════════════════════════
 ## PART 5 — VERIFY ON PMM SERVER
-## ▶ Run on: 192.168.109.128
+## Run on: 192.168.109.128
 ## ══════════════════════════════════════════════
 
 ---
@@ -610,7 +610,7 @@ pmm-admin list
 ### Step 5.1 — Check Registered Nodes via API (if this donot show anything dont warry go to step 5.3)
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 curl -sk -u admin:YOUR_PMM_PASSWORD \
   https://192.168.109.128/v1/inventory/Nodes \
@@ -630,7 +630,7 @@ Expected output:
 ### Step 5.2 — Check Registered Services via API (if this donot show anything dont warry go to step 5.3)
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 curl -sk -u admin:YOUR_PMM_PASSWORD \
   https://192.168.109.128/v1/inventory/Services \
@@ -669,7 +669,7 @@ Open `https://192.168.109.128` in a browser and verify:
 ### PMM Agent Shows `Connected: false`
 
 ```bash
-# ▶ SERVER: affected node (192.168.109.133 / .134 / .135)
+# SERVER: affected node (192.168.109.133 / .134 / .135)
 
 # Step 1 — Test network connectivity to PMM Server
 curl -sk https://192.168.109.128/ping
@@ -696,7 +696,7 @@ sudo pmm-admin config \
 ### PostgreSQL Service Shows No Data in PMM
 
 ```bash
-# ▶ SERVER: affected node
+# SERVER: affected node
 
 # Step 1 — Confirm pmm_user can connect
 psql -h 127.0.0.1 -U pmm_user -d postgres -c "SELECT 1;"
@@ -728,7 +728,7 @@ sudo pmm-admin add postgresql \
 ### OS Metrics Not Showing in PMM
 
 ```bash
-# ▶ SERVER: affected node
+# SERVER: affected node
 
 # Check node_exporter is listed and RUNNING
 pmm-admin list | grep node_exporter
@@ -745,7 +745,7 @@ sudo systemctl status pmm-agent
 ### PMM Server Container Not Starting
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 # Check Docker is running
 sudo systemctl status docker
@@ -781,9 +781,9 @@ docker restart pmm-server
 ### Update PMM Client (Run After Any Percona Release)
 
 ```bash
-# ▶ SERVER: 192.168.109.133
-# ▶ SERVER: 192.168.109.134
-# ▶ SERVER: 192.168.109.135
+# SERVER: 192.168.109.133
+# SERVER: 192.168.109.134
+# SERVER: 192.168.109.135
 
 sudo dnf update pmm2-client -y
 sudo systemctl restart pmm-agent
@@ -795,7 +795,7 @@ pmm-admin --version
 ### Update PMM Server Container
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 # Pull newer image
 docker pull percona/pmm-server:2
@@ -823,7 +823,7 @@ docker logs pmm-server --tail=20
 ### Backup PMM Data
 
 ```bash
-# ▶ SERVER: 192.168.109.128
+# SERVER: 192.168.109.128
 
 sudo mkdir -p /backup/pmm
 
@@ -883,7 +883,4 @@ ls -lh /backup/pmm/
 
 ---
 
-*Scope: OS Metrics + PostgreSQL/Patroni Metrics only*
-*OS: Rocky Linux | PMM Version: 2.x*
-*PMM Server: 192.168.109.128*
-*Client Nodes: 192.168.109.133 | 192.168.109.134 | 192.168.109.135*
+
