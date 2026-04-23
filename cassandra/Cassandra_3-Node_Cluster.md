@@ -1,3 +1,4 @@
+
 # Apache Cassandra 3-Node Cluster: Complete Production Guide
 
 > **OS:** Rocky Linux 9 | **Cassandra:** 4.1.x (Latest Stable) | **Java:** OpenJDK 11
@@ -24,7 +25,7 @@
 13. [Production Gotchas & Checklist](#13-production-gotchas--checklist)
 
 ---
-
+<img width="1408" height="768" alt="Gemini_Generated_Image_8cpcir8cpcir8cpc" src="https://github.com/user-attachments/assets/2900438a-d1f3-49e1-bc95-8c73375263b5" />
 ## 1. Cluster Architecture Overview
 
 | Node   | Hostname | IP Address       | Role        |
