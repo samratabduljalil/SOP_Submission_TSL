@@ -392,11 +392,11 @@ Always edit `/etc/cassandra/conf/cassandra.yaml`. If `conf/cassandra.yaml` is mi
 # Back up the active config
 sudo cp /etc/cassandra/conf/cassandra.yaml /etc/cassandra/conf/cassandra.yaml.bak
 
-# If conf/cassandra.yaml is empty or missing, seed it from the default
-sudo cp /etc/cassandra/default.conf/cassandra.yaml /etc/cassandra/conf/cassandra.yaml
+# Edit the  config
+sudo nano /cassandra.yaml
 
-# Edit the active config
-sudo nano /etc/cassandra/conf/cassandra.yaml
+# Replace yml file
+sudo cp /cassandra.yaml /etc/cassandra/conf/cassandra.yaml
 ```
 
 Find and set the following values in `cassandra.yaml`:
