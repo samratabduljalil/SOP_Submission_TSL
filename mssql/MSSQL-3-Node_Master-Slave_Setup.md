@@ -32,10 +32,10 @@
 | node2  | node2    | 192.168.109.168  | **Secondary (Slave 1)**       | Synchronous          |
 | node3  | node3    | 192.168.109.171  | **Secondary (Slave 2 / DR)**  | Asynchronous         |
 
-```
+
 <img width="1536" height="1024" alt="c1c9f794-66d4-420c-a9d0-3179e4eae7dc" src="https://github.com/user-attachments/assets/6fb62be8-fe52-4e56-915b-d96da968ac1b" />
 
-```
+
 
 > **Your VM IPs are already configured** in this guide: node1=`192.168.109.170`, node2=`192.168.109.168`, node3=`192.168.109.171`.
 
