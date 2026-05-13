@@ -3,6 +3,19 @@
 
 ---
 
+## ⚠️ Prerequisites — You Must Complete These First
+
+This document is **Part 3** of a 3-part series. Before following any steps here, you must have completed both of the following guides in order:
+
+| Step | Document | Description |
+|------|----------|-------------|
+| 1 | [Microsoft SQL Server Installation Guide on Rocky Linux](https://github.com/samratabduljalil/SOP_Submission_TSL/blob/main/mssql/Microsoft%20SQL%20Server%20Installation%20Guide%20on%20Rocky%20Linux.md) | Install and configure SQL Server on all 3 nodes |
+| 2 | [MSSQL 3-Node Master-Slave Setup](https://github.com/samratabduljalil/SOP_Submission_TSL/blob/main/mssql/MSSQL-3-Node_Master-Slave_Setup.md) | Create the Always On Availability Group with certificates, endpoints, and replication |
+
+> **Do not proceed with this guide unless AG1 is already created, AGTestDB is replicating across all 3 nodes, and all replicas show HEALTHY.**
+
+---
+
 ## Architecture Overview
 
 | Node  | Hostname | IP Address       | Role                            | Commit Mode  |
